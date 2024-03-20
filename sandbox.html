@@ -27,7 +27,7 @@
   document.addEventListener('DOMContentLoaded', function() {
     var iframe = document.getElementById('iframe');
     iframe.onload = function() {
-      iframe.contentWindow.postMessage({material: 'cortenSteel'}, '*');
+      iframe.contentWindow.postMessage({material: 'steelCorten'}, '*');
       iframe.contentWindow.postMessage({shape: 'type1'}, '*');
     };
   });
