@@ -1,5 +1,5 @@
 <div id="iframe-container" style="overflow: hidden; width: 300px; height: 300px; border: 1px solid;">
-  <iframe id="iframe" src="https://syntask.github.io/foliage/" style="width: 100%; height: 100%; border: none;"></iframe>
+  <iframe id="iframe" src="index.html" style="width: 100%; height: 100%; border: none;"></iframe>
 </div>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -15,6 +15,12 @@
 <input type="range" min="12" max="120" value="50" id="inputLength">
 <p>Height:</p>
 <input type="range" min="12" max="48" value="50" id="inputHeight">
+<p>Key:</p>
+<input type="text" id="inputKey">
+<p>Value:</p>
+<input type="text" id="inputValue">
+<br /><br />
+<input type="button" value="Submit" id="inputSubmit">
 
 <script>
 
@@ -22,6 +28,7 @@
     var iframe = document.getElementById('iframe');
     iframe.onload = function() {
       iframe.contentWindow.postMessage({material: 'cortenSteel'}, '*');
+      iframe.contentWindow.postMessage({shape: 'type1'}, '*');
     };
   });
 
@@ -35,5 +42,15 @@
     $('#inputHeight').on('input', function() {
       document.getElementById('iframe').contentWindow.postMessage({height: this.value}, '*');
     });
+    $('#inputSubmit').on('click', function() {
+      var key = document.getElementById('inputKey').value;
+      var value = document.getElementById('inputValue').value;
+      var message = {};
+      message[key] = value;
+      document.getElementById('iframe').contentWindow.postMessage(message, '*');
+      document.getElementById('inputKey').value = ""
+      document.getElementById('inputValue').value = ""
+    });
+
   });
 </script>
