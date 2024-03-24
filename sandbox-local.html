@@ -1,0 +1,73 @@
+<div id="iframe-container" style="overflow: hidden; width: 300px; height: 300px; border: 1px solid;">
+  <iframe id="iframe" src="../index.html" style="width: 100%; height: 100%; border: none;"></iframe>
+</div>
+<p>Width:</p>
+<input type="range" min="12" max="120" value="30" id="inputWidth">
+<p>Length:</p>
+<input type="range" min="12" max="120" value="72" id="inputLength">
+<p>Height:</p>
+<input type="range" min="12" max="48" value="24" id="inputHeight">
+<p>Key:</p>
+<input type="text" id="inputKey">
+<p>Value:</p>
+<input type="text" id="inputValue">
+<br /><br />
+<input type="button" value="Submit" id="inputSubmit">
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var iframe = document.getElementById('iframe');
+    iframe.onload = function() {
+      iframe.contentWindow.postMessage({material: 'steelCorten'}, '*');
+      iframe.contentWindow.postMessage({shape: 'type1'}, '*');
+    };
+  });
+
+  var inputWidth = document.getElementById('inputWidth');
+  var inputLength = document.getElementById('inputLength');
+  var inputHeight = document.getElementById('inputHeight');
+  var inputSubmit = document.getElementById('inputSubmit');
+  var widthindex = 0
+  var widthtarget = 30
+  var lengthindex = 0
+  var lengthtarget = 30
+  var heightindex = 0
+  var heighttarget = 24
+
+  //function repeatFunction() {
+    //iframe.contentWindow.postMessage({width: widthindex}, '*');
+    //iframe.contentWindow.postMessage({length: lengthindex}, '*');
+    //iframe.contentWindow.postMessage({height: heightindex}, '*');
+    //widthindex += (widthtarget - widthindex) / 8
+    //lengthindex += (lengthtarget - lengthindex) / 8
+    //heightindex += (heighttarget - heightindex) / 8
+  //}
+
+  // Use setInterval to run the function
+  //const intervalId = setInterval(repeatFunction, 25);
+
+  inputWidth.oninput = function() {
+    //widthtarget = inputWidth.value
+    iframe.contentWindow.postMessage({width: inputWidth.value}, '*');
+  };
+  inputLength.oninput = function() {
+    //lengthtarget = inputLength.value
+    iframe.contentWindow.postMessage({length: inputLength.value}, '*');
+  };
+  inputHeight.oninput = function() {
+    //heighttarget = inputHeight.value
+    iframe.contentWindow.postMessage({height: inputHeight.value}, '*');
+  };
+
+  inputSubmit.onclick = function() {
+    var key = document.getElementById('inputKey').value;
+    var value = document.getElementById('inputValue').value;
+    var message = {};
+    message[key] = value;
+    document.getElementById('iframe').contentWindow.postMessage(message, '*');
+    document.getElementById('inputKey').value = ""
+    document.getElementById('inputValue').value = ""
+  };
+
+</script>
