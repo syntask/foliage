@@ -17,12 +17,12 @@ body{
 }
 body::before {
   content: '';
-  background-image: url('textures/shadows/shadowGeneric.png'); /* Replace 'your-image-url.jpg' with your actual image URL */
-  background-size: contain; /* Sets the background image to cover the entire div */
-  background-repeat: no-repeat; /* Prevents the background image from repeating */
-  background-position: center; /* Centers the background image within the div */
-  opacity: 0.15; /* Sets the opacity to 50% */
-  position: absolute; /* Positions the pseudo-element */
+  background-image: url('textures/shadows/shadowGeneric.webp'); 
+  background-size: contain; 
+  background-repeat: no-repeat; 
+  background-position: center; 
+  opacity: 0.15; 
+  position: absolute; 
   top: 8%;
   right: 8%;
   bottom: 8%;
