@@ -37,6 +37,25 @@ if (!customElements.get('media-gallery')) {
         if (!gl) {
           return; 
         }
+
+        function isInAppBrowser() {
+            // Get the user agent string
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        
+            // Check for Facebook and Instagram user agents
+            const isFacebookApp = /FBAN|FBAV/i.test(userAgent);
+            const isInstagramApp = /Instagram/i.test(userAgent);
+        
+            // Set variable to true if in Facebook or Instagram in-app browser
+            const isInAppBrowser = isFacebookApp || isInstagramApp;
+        
+            return isInAppBrowser;
+        }
+        const isInApp = isInAppBrowser();
+        if (isInApp) {
+          return; 
+        }
+
     
         // Create the iframe element
         const iframe = document.createElement('iframe');
@@ -45,6 +64,7 @@ if (!customElements.get('media-gallery')) {
         iframe.setAttribute('height', '100%');
         iframe.setAttribute('frameborder', '0');
         iframe.setAttribute('allowfullscreen', '');
+        iframe.setAttribute('sandbox', 'allow-scripts');
         iframe.setAttribute('id', 'iframe3dpreview');
     
         // Replace the image with the iframe
